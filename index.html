@@ -1,570 +1,372 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Filipe Martins Gomes</title>
-  <style>
-    :root {
-      --navy: #1a2744;
-      --accent: #2e6fbb;
-      --accent-light: #e8f0fb;
-      --text: #2c2c2c;
-      --muted: #6b7280;
-      --border: #e5e7eb;
-      --bg: #fafafa;
-      --white: #ffffff;
-      --max-w: 780px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filipe — Strategy, Capabilities & Organisational Learning</title>
+<meta name="description" content="Writing and practice at the intersection of strategy, technology, innovation, and organisational learning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..450&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Considered Warmth — brand tokens */
+    --petrol:#1E5B5E;
+    --petrol-deep:#17474A;
+    --petrol-tint:#D7E6E3;
+    --ink:#1C1B18;
+    --ink-soft:#4a463d;
+    --stone:#8C8576;
+    --paper:#F5F1E8;
+    --sand:#ECE6D8;
+    --clay:#C9622F;
+    --clay-deep:#A0451E;
+    --rule:#D9D2C4;
+    --max:1180px;
+    --display:"Fraunces", Georgia, serif;
+    --read:"Newsreader", Georgia, serif;
+    --label:"Archivo", system-ui, sans-serif;
+  }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
 
-    html { scroll-behavior: smooth; }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--read);
+    font-size:clamp(17px,1.05vw + 13px,20px);
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    position:relative;
+  }
 
-    body {
-      font-family: 'Georgia', serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.75;
-    }
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none; z-index:1;
+    opacity:.5; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  }
 
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
-      z-index: 100;
-      padding: 0 2rem;
-    }
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;position:relative;z-index:2;}
 
-    nav .inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 58px;
-    }
+  .label{font-family:var(--label);text-transform:uppercase;letter-spacing:.22em;font-size:.72rem;font-weight:600;color:var(--stone);}
+  a{color:inherit;}
 
-    nav .brand {
-      font-family: 'Georgia', serif;
-      font-size: 1.05rem;
-      font-weight: bold;
-      color: var(--navy);
-      text-decoration: none;
-      letter-spacing: 0.01em;
-    }
+  /* ---------- nav ---------- */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--rule);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; height:66px;}
+  .brand{font-family:var(--display);font-weight:600;font-size:1.18rem;letter-spacing:-.01em;text-decoration:none;}
+  .brand .dot{color:var(--clay);}
+  .nav-links{display:flex; align-items:center; gap:30px;}
+  .nav-links a{font-family:var(--label);text-transform:uppercase;letter-spacing:.14em;font-size:.74rem;font-weight:500;text-decoration:none;color:var(--ink-soft);position:relative;}
+  .nav-links a:not(.btn)::after{content:""; position:absolute; left:0; bottom:-5px; width:100%; height:1.5px; background:var(--petrol); transform:scaleX(0); transform-origin:left; transition:transform .35s cubic-bezier(.2,.7,.3,1);}
+  .nav-links a:not(.btn):hover::after{transform:scaleX(1);}
+  .btn{display:inline-block; background:var(--petrol); color:var(--paper); padding:9px 18px; border-radius:2px; text-decoration:none; font-family:var(--label); text-transform:uppercase; letter-spacing:.12em; font-size:.72rem; font-weight:600; transition:background .3s ease, transform .3s ease;}
+  .btn:hover{background:var(--petrol-deep); transform:translateY(-1px);}
+  .nav-toggle{display:none;background:none;border:0;cursor:pointer;font-family:var(--label);text-transform:uppercase;letter-spacing:.14em;font-size:.74rem;color:var(--ink);}
 
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 2rem;
-    }
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:hidden;min-height:62vh;padding:clamp(60px,11vh,140px) 0 clamp(50px,8vh,90px);}
+  .hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;}
+  .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(135% 120% at 16% 45%, rgba(245,241,232,.90) 0%, rgba(245,241,232,.50) 40%, rgba(245,241,232,.12) 100%);}
+  .hero .kicker{margin-bottom:26px;display:flex;align-items:center;gap:14px;}
+  .hero .kicker::before{content:"";width:34px;height:1.5px;background:var(--clay);display:inline-block;}
+  .hero h1{font-family:var(--display);font-weight:340;font-size:clamp(2.6rem,6.2vw,5.4rem);line-height:1.02;letter-spacing:-.025em;margin-bottom:30px;max-width:15ch;}
+  .hero h1 em{font-style:italic;color:var(--clay);font-weight:420;}
+  .hero .lede{font-size:clamp(1.15rem,1.6vw,1.5rem);line-height:1.5;color:var(--ink-soft);max-width:42ch;margin-bottom:38px;}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
+  .link-arrow{font-family:var(--label);text-transform:uppercase;letter-spacing:.12em;font-size:.74rem;font-weight:600;text-decoration:none;color:var(--ink);border-bottom:1.5px solid transparent;padding-bottom:3px;transition:border-color .3s,color .3s;}
+  .link-arrow:hover{color:var(--clay-deep);border-color:var(--clay);}
 
-    nav ul a {
-      font-family: system-ui, sans-serif;
-      font-size: 0.875rem;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
+  /* ---------- section frame ---------- */
+  section{padding:clamp(56px,9vh,108px) 0;}
+  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:46px;border-top:1px solid var(--rule);padding-top:22px;}
+  .sec-no{font-family:var(--display);font-style:italic;color:var(--petrol);font-size:1.05rem;}
+  .sec-head h2{font-family:var(--display);font-weight:380;font-size:clamp(1.8rem,3.2vw,2.7rem);letter-spacing:-.02em;line-height:1.05;}
 
-    nav ul a:hover { color: var(--accent); }
+  /* ---------- about ---------- */
+  .about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(40px,6vw,90px);align-items:start;}
+  .about-body p{margin-bottom:1.1em;font-size:clamp(1.1rem,1.3vw,1.32rem);color:#2b291f;}
+  .about-body p:last-child{margin-bottom:0;}
+  .about-body .drop::first-letter{font-family:var(--display);font-size:3.6em;line-height:.78;float:left;padding:.06em .12em 0 0;color:var(--petrol);font-weight:380;}
+  .facts{font-family:var(--label);}
+  .facts dl{display:grid;gap:0;}
+  .facts .row{padding:16px 0;border-top:1px solid var(--rule);}
+  .facts .row:last-child{border-bottom:1px solid var(--rule);}
+  .facts dt{font-size:.68rem;text-transform:uppercase;letter-spacing:.2em;color:var(--stone);margin-bottom:6px;}
+  .facts dd{font-family:var(--read);font-size:1.02rem;color:var(--ink);line-height:1.4;}
+  .portrait{margin:0 0 32px;position:relative;max-width:360px;}
+  .portrait img{width:100%;height:auto;display:block;border-radius:2px;}
+  .portrait::after{content:"";position:absolute;left:0;bottom:-13px;width:46px;height:3px;background:var(--clay);}
 
-    /* ── HERO ── */
-    #about {
-      background: var(--navy);
-      color: var(--white);
-      padding: 5rem 2rem 4.5rem;
-    }
+  /* ---------- themes ---------- */
+  .themes{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);}
+  .theme{background:var(--paper);padding:34px 30px 38px;transition:background .4s ease;position:relative;}
+  .theme:hover{background:var(--sand);}
+  .theme .t-no{font-family:var(--display);font-style:italic;font-size:1.1rem;color:var(--petrol);margin-bottom:20px;}
+  .theme h3{font-family:var(--display);font-weight:400;font-size:1.5rem;line-height:1.1;letter-spacing:-.01em;margin-bottom:14px;}
+  .theme p{font-size:1.02rem;color:var(--ink-soft);line-height:1.5;}
+  .theme .names{margin-top:18px;font-family:var(--label);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);}
 
-    #about .inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 3rem;
-      align-items: center;
-    }
+  /* ---------- writing ---------- */
+  .writing-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;}
+  .posts{display:flex;flex-direction:column;}
+  .post{display:block;text-decoration:none;padding:24px 0;border-top:1px solid var(--rule);transition:padding-left .35s cubic-bezier(.2,.7,.3,1);}
+  .posts .post:last-child{border-bottom:1px solid var(--rule);}
+  .post:hover{padding-left:14px;}
+  .post .meta{font-family:var(--label);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--stone);margin-bottom:9px;}
+  .post h3{font-family:var(--display);font-weight:400;font-size:1.42rem;line-height:1.12;letter-spacing:-.01em;transition:color .3s;}
+  .post:hover h3{color:var(--petrol);}
+  .subscribe{background:var(--petrol);color:var(--paper);padding:42px 38px;border-radius:3px;position:sticky;top:90px;}
+  .subscribe .label{color:#9fc2bf;}
+  .subscribe h3{font-family:var(--display);font-weight:360;font-size:1.9rem;line-height:1.1;margin:16px 0 14px;letter-spacing:-.01em;}
+  .subscribe p{color:#cfe0de;font-size:1.02rem;line-height:1.5;margin-bottom:26px;}
+  .subscribe .btn{background:var(--clay);color:#fff;width:100%;text-align:center;padding:13px;}
+  .subscribe .btn:hover{background:var(--paper);color:var(--petrol);}
 
-    #about h1 {
-      font-size: 2.4rem;
-      font-weight: normal;
-      line-height: 1.2;
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.01em;
-    }
+  /* ---------- connect / footer ---------- */
+  footer.site{padding:clamp(60px,9vh,110px) 0 50px;border-top:1px solid var(--rule);}
+  .connect h2{font-family:var(--display);font-weight:340;font-size:clamp(2rem,4.5vw,3.4rem);letter-spacing:-.02em;line-height:1.05;max-width:16ch;margin-bottom:36px;}
+  .connect h2 a{color:var(--clay-deep);text-decoration:none;border-bottom:2px solid transparent;transition:border-color .3s;}
+  .connect h2 a:hover{border-color:var(--clay);}
+  .social{display:flex;gap:28px;flex-wrap:wrap;margin-bottom:60px;}
+  .social a{font-family:var(--label);text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;font-weight:500;text-decoration:none;color:var(--ink-soft);border-bottom:1.5px solid var(--rule);padding-bottom:4px;transition:color .3s,border-color .3s;}
+  .social a:hover{color:var(--petrol);border-color:var(--petrol);}
+  .foot-base{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-family:var(--label);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);}
 
-    #about .tagline {
-      font-family: system-ui, sans-serif;
-      font-size: 1rem;
-      color: #93aed8;
-      margin-bottom: 1.5rem;
-      font-style: normal;
-      letter-spacing: 0.02em;
-    }
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.3,1);}
+  .reveal.in{opacity:1;transform:none;}
+  [data-d="1"]{transition-delay:.08s;}[data-d="2"]{transition-delay:.16s;}
+  [data-d="3"]{transition-delay:.24s;}[data-d="4"]{transition-delay:.32s;}
 
-    #about p {
-      font-size: 1.05rem;
-      color: #c9d7ec;
-      max-width: 520px;
-      margin-bottom: 1.75rem;
-      line-height: 1.8;
-    }
-
-    .avatar {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      background: #2e6fbb33;
-      border: 3px solid #2e6fbb88;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      flex-shrink: 0;
-    }
-
-    .cta-row {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 0.6rem 1.4rem;
-      border-radius: 6px;
-      font-family: system-ui, sans-serif;
-      font-size: 0.875rem;
-      text-decoration: none;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      transition: all 0.2s;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: white;
-    }
-
-    .btn-primary:hover { background: #2560a8; }
-
-    .btn-outline {
-      border: 1.5px solid #4a7ab5;
-      color: #93aed8;
-    }
-
-    .btn-outline:hover { border-color: #93aed8; color: white; }
-
-    /* ── SECTIONS ── */
-    section {
-      padding: 4rem 2rem;
-    }
-
-    section:nth-of-type(even) {
-      background: var(--white);
-    }
-
-    .section-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-    }
-
-    .section-label {
-      font-family: system-ui, sans-serif;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 0.5rem;
-    }
-
-    h2 {
-      font-size: 1.75rem;
-      font-weight: normal;
-      color: var(--navy);
-      margin-bottom: 0.75rem;
-      line-height: 1.3;
-    }
-
-    .section-intro {
-      color: var(--muted);
-      font-family: system-ui, sans-serif;
-      font-size: 0.95rem;
-      margin-bottom: 2.5rem;
-      max-width: 540px;
-    }
-
-    /* ── THEMES ── */
-    .themes-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .theme-card {
-      background: var(--accent-light);
-      border: 1px solid #c5d9f5;
-      border-radius: 10px;
-      padding: 1.25rem;
-    }
-
-    .theme-card h3 {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--navy);
-      font-family: system-ui, sans-serif;
-      margin-bottom: 0.4rem;
-    }
-
-    .theme-card p {
-      font-size: 0.82rem;
-      color: var(--muted);
-      font-family: system-ui, sans-serif;
-      line-height: 1.6;
-    }
-
-    /* ── BLOG ── */
-    #blog .post-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .post-card {
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.5rem;
-      background: var(--white);
-      transition: box-shadow 0.2s, border-color 0.2s;
-    }
-
-    .post-card:hover {
-      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-      border-color: #bdd3f0;
-    }
-
-    .post-meta {
-      font-family: system-ui, sans-serif;
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-bottom: 0.4rem;
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
-
-    .post-tag {
-      background: var(--accent-light);
-      color: var(--accent);
-      padding: 2px 8px;
-      border-radius: 20px;
-      font-size: 0.72rem;
-      font-weight: 600;
-    }
-
-    .post-card h3 {
-      font-size: 1.05rem;
-      color: var(--navy);
-      margin-bottom: 0.5rem;
-      line-height: 1.4;
-    }
-
-    .post-card p {
-      font-size: 0.88rem;
-      color: var(--muted);
-      font-family: system-ui, sans-serif;
-      line-height: 1.65;
-    }
-
-    .post-card a.read-more {
-      display: inline-block;
-      margin-top: 0.75rem;
-      font-size: 0.82rem;
-      font-family: system-ui, sans-serif;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .post-card a.read-more:hover { text-decoration: underline; }
-
-    /* ── RESEARCH ── */
-    #research .pub-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .pub-card {
-      border-left: 3px solid var(--accent);
-      padding: 0.1rem 0 0.1rem 1.25rem;
-    }
-
-    .pub-card .pub-type {
-      font-family: system-ui, sans-serif;
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 0.25rem;
-    }
-
-    .pub-card h3 {
-      font-size: 0.97rem;
-      color: var(--navy);
-      margin-bottom: 0.3rem;
-      line-height: 1.45;
-    }
-
-    .pub-card .pub-meta {
-      font-family: system-ui, sans-serif;
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    .pub-card .pub-meta em {
-      font-style: italic;
-    }
-
-    /* ── CONTACT ── */
-    #contact .contact-box {
-      background: var(--navy);
-      color: white;
-      border-radius: 14px;
-      padding: 3rem;
-      text-align: center;
-    }
-
-    #contact .contact-box h2 {
-      color: white;
-      font-size: 1.6rem;
-      margin-bottom: 0.75rem;
-    }
-
-    #contact .contact-box p {
-      color: #93aed8;
-      font-family: system-ui, sans-serif;
-      font-size: 0.95rem;
-      margin-bottom: 2rem;
-    }
-
-    .contact-links {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      padding: 2rem;
-      text-align: center;
-      font-family: system-ui, sans-serif;
-      font-size: 0.8rem;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 620px) {
-      #about .inner {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .avatar { margin: 0 auto; }
-
-      #about h1 { font-size: 1.9rem; }
-
-      .cta-row { justify-content: center; }
-
-      #contact .contact-box { padding: 2rem 1.5rem; }
-    }
-  </style>
+  /* ---------- responsive ---------- */
+  @media(max-width:860px){
+    .about-grid{grid-template-columns:1fr;}
+    .themes{grid-template-columns:1fr;}
+    .writing-grid{grid-template-columns:1fr;}
+    .subscribe{position:static;}
+    .nav-links{position:fixed;inset:66px 0 auto 0;flex-direction:column;align-items:flex-start;gap:0;background:var(--paper);border-bottom:1px solid var(--rule);padding:8px 28px 20px;transform:translateY(-130%);transition:transform .4s ease;}
+    .nav-links.open{transform:translateY(0);}
+    .nav-links a:not(.btn){padding:14px 0;width:100%;border-bottom:1px solid var(--rule);}
+    .nav-links .btn{margin-top:14px;}
+    .nav-toggle{display:block;}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="inner">
-    <a href="#about" class="brand">Filipe Martins Gomes</a>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#blog">Writing</a></li>
-      <li><a href="#research">Research</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+<header class="site">
+  <div class="wrap nav">
+    <a href="#top" class="brand">Filipe<span class="dot">.</span></a>
+    <nav class="nav-links" id="menu">
+      <a href="#about">About</a>
+      <a href="#themes">Themes</a>
+      <a href="#writing">Writing</a>
+      <a href="#connect">Connect</a>
+      <a href="https://YOURNAME.substack.com" class="btn">Subscribe</a>
+    </nav>
+    <button class="nav-toggle" id="toggle" aria-label="Menu">Menu</button>
   </div>
-</nav>
+</header>
 
-<!-- HERO / ABOUT -->
-<section id="about">
-  <div class="inner">
-    <div>
-      <h1>Filipe Martins Gomes</h1>
-      <p class="tagline">PhD Researcher · Innovation Management · Leadership</p>
-      <p>
-        I study how organisations sense, seize, and reconfigure capabilities to compete in complex environments. My work sits at the intersection of dynamic capabilities, business model innovation, and systems thinking — bridging rigorous academic research with practical leadership challenges.
-      </p>
-      <div class="cta-row">
-        <a href="#blog" class="btn btn-primary">Read my writing</a>
-        <a href="#research" class="btn btn-outline">Research & publications</a>
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <canvas class="hero-canvas" id="hero-net" aria-hidden="true"></canvas>
+    <div class="hero-veil" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="kicker reveal"><span class="label">Strategy · Innovation · People</span></div>
+      <h1 class="reveal" data-d="1">People are the <em>point</em>.</h1>
+      <p class="lede reveal" data-d="2">Organisations are networks, and people are the nodes that learn, adapt, and create value — linked by the intermediaries who carry ideas between them. I work, research, and write at that human centre of innovation.</p>
+      <div class="hero-cta reveal" data-d="3">
+        <a href="https://YOURNAME.substack.com" class="btn">Read the Substack</a>
+        <a href="#about" class="link-arrow">More about me →</a>
       </div>
     </div>
-    <div class="avatar">🎓</div>
-  </div>
-</section>
+  </section>
 
-<!-- THEMES -->
-<section id="themes">
-  <div class="section-inner">
-    <p class="section-label">Focus areas</p>
-    <h2>What I write and think about</h2>
-    <p class="section-intro">My work connects academic rigour with practical relevance across these core themes.</p>
-    <div class="themes-grid">
-      <div class="theme-card">
-        <h3>⚡ Dynamic Capabilities</h3>
-        <p>How firms sense and seize opportunities and reconfigure resources to maintain competitive advantage in turbulent environments.</p>
-      </div>
-      <div class="theme-card">
-        <h3>🔄 Business Model Innovation</h3>
-        <p>The structures, processes, and logic firms use to create, deliver, and capture value — and how they evolve.</p>
-      </div>
-      <div class="theme-card">
-        <h3>🌐 Innovation Intermediaries</h3>
-        <p>The brokers, platforms, and ecosystems that facilitate knowledge transfer and collaborative innovation between actors.</p>
-      </div>
-      <div class="theme-card">
-        <h3>🧭 Leadership</h3>
-        <p>What it means to lead in complex, uncertain environments — from strategic decision-making to organisational culture.</p>
-      </div>
-      <div class="theme-card">
-        <h3>🔗 Systems Thinking</h3>
-        <p>Understanding organisations and markets as interconnected systems, where structure drives behaviour.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BLOG -->
-<section id="blog">
-  <div class="section-inner">
-    <p class="section-label">Writing</p>
-    <h2>Latest posts</h2>
-    <p class="section-intro">I write on LinkedIn and Substack about innovation, strategy, and leadership. More posts coming soon.</p>
-
-    <div class="post-list">
-      <!-- Placeholder post 1 -->
-      <div class="post-card">
-        <div class="post-meta">
-          <span class="post-tag">Dynamic Capabilities</span>
-          <span>Coming soon</span>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-no">01</span><h2>About</h2></div>
+      <div class="about-grid">
+        <div class="about-body reveal" data-d="1">
+          <p class="drop">Strip away the jargon and innovation comes down to something simple: organisations don't learn, spot opportunities, or create value on their own — people do that work. Knowledge gets generated, shared, and absorbed by human beings; dynamic capabilities live in them, not in the org chart. I believe the people and bodies that <em>connect</em> all of this — the intermediaries, whether a whole organisation or a single individual brokering across boundaries — are the most important and most overlooked part of how innovation actually happens.</p>
+          <p>That conviction matters more now, not less — though not in the way the headlines suggest. Part of what makes us human is our capacity to imagine, build, and wield tools; AI is the newest of them, not an exception to them. The question was never people <em>or</em> technology — it's that the toolmaker matters more than the tool. So as AI, automation and digitalisation reshape how organisations work, value doesn't drain away from people; it concentrates in them — in the judgement, the translation, and the trust that decide whether a new capability actually takes hold.</p>
+          <p>This isn't abstract for me. For nearly two decades I've designed and delivered innovation and growth programmes across deep tech and venture building — in the UK, Brazil and the Middle East — and today I do it as a Principal Innovation Solutions Consultant at Digital Catapult, itself an innovation intermediary. Alongside practice, I'm completing a PhD on innovation intermediaries in resource-constrained ecosystems. I write to close the distance between that thinking and what a practitioner can actually do on Monday morning — connecting dynamic capabilities, innovation management and organisational learning, with people at the centre of all three.</p>
         </div>
-        <h3>What are Dynamic Capabilities — and why do they matter?</h3>
-        <p>An accessible introduction to Teece, Pisano & Shuen's landmark framework, and what it means for organisations trying to stay ahead of the curve.</p>
-        <a href="#" class="read-more">Read on Substack →</a>
-      </div>
-
-      <!-- Placeholder post 2 -->
-      <div class="post-card">
-        <div class="post-meta">
-          <span class="post-tag">Business Model Innovation</span>
-          <span>Coming soon</span>
+        <div class="facts reveal" data-d="2">
+          <figure class="portrait"><img src="portrait.jpg" alt="Portrait of Filipe"></figure>
+          <dl>
+            <div class="row"><dt>Role</dt><dd>Principal Innovation Solutions Consultant, Digital Catapult</dd></div>
+            <div class="row"><dt>Focus</dt><dd>Strategy · Innovation · People</dd></div>
+            <div class="row"><dt>Education</dt><dd>PhD (in progress), Innovation Intermediaries · MSc, Production Engineering</dd></div>
+            <div class="row"><dt>Based</dt><dd>United Kingdom</dd></div>
+          </dl>
         </div>
-        <h3>Why most companies innovate products, not business models</h3>
-        <p>Changing a product is often easier than changing the logic of how value is created and captured. Here's why that distinction matters.</p>
-        <a href="#" class="read-more">Read on LinkedIn →</a>
       </div>
+    </div>
+  </section>
 
-      <!-- Placeholder post 3 -->
-      <div class="post-card">
-        <div class="post-meta">
-          <span class="post-tag">Leadership</span>
-          <span>Coming soon</span>
+  <!-- THEMES -->
+  <section id="themes">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-no">02</span><h2>What I write about</h2></div>
+      <div class="themes">
+        <article class="theme reveal" data-d="1">
+          <div class="t-no">i.</div>
+          <h3>Dynamic Capabilities</h3>
+          <p>How firms sense, seize, and transform — and why so few sustain it. Reading Teece against the grain of real organisations.</p>
+          <div class="names">Teece · Pisano · Shuen</div>
+        </article>
+        <article class="theme reveal" data-d="2">
+          <div class="t-no">ii.</div>
+          <h3>Innovation Management</h3>
+          <p>Turning novelty into value — how organisations actually fund, structure, and absorb innovation, and the intermediaries that help it travel.</p>
+          <div class="names">Process · Intermediaries · Absorption</div>
+        </article>
+        <article class="theme reveal" data-d="3">
+          <div class="t-no">iii.</div>
+          <h3>Organisational Learning</h3>
+          <p>Tacit and explicit knowledge, single- and double-loop learning, and the gap between what organisations know and what they do.</p>
+          <div class="names">Nonaka · Argyris &amp; Schön</div>
+        </article>
+        <article class="theme reveal" data-d="4">
+          <div class="t-no">iv.</div>
+          <h3>Strategy in Practice</h3>
+          <p>Frameworks as tools, not decoration. Less abstraction, more application — built for people who have to make decisions.</p>
+          <div class="names">Practice over theory</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- WRITING -->
+  <section id="writing">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-no">03</span><h2>From the Substack</h2></div>
+      <div class="writing-grid">
+        <div class="posts reveal" data-d="1">
+          <a href="https://YOURNAME.substack.com" class="post">
+            <div class="meta">Essay · Replace me</div>
+            <h3>Your most recent post title goes here</h3>
+          </a>
+          <a href="https://YOURNAME.substack.com" class="post">
+            <div class="meta">Framework · Replace me</div>
+            <h3>A second piece — swap in your real titles and links</h3>
+          </a>
+          <a href="https://YOURNAME.substack.com" class="post">
+            <div class="meta">Note · Replace me</div>
+            <h3>A third, then point each link at the article</h3>
+          </a>
         </div>
-        <h3>Leading through uncertainty: lessons from complexity theory</h3>
-        <p>Traditional leadership models assume a stable environment. What happens when the environment is anything but stable?</p>
-        <a href="#" class="read-more">Read on Substack →</a>
+        <aside class="subscribe reveal" data-d="2">
+          <span class="label">The newsletter</span>
+          <h3>Frameworks you can actually use.</h3>
+          <p>Strategic management ideas, stripped of jargon and built for application. New essays land in your inbox — no fluff.</p>
+          <a href="https://YOURNAME.substack.com" class="btn">Subscribe free</a>
+        </aside>
       </div>
     </div>
+  </section>
 
-    <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-      <a href="https://substack.com" target="_blank" class="btn btn-primary" style="background: var(--navy);">Follow on Substack</a>
-      <a href="https://linkedin.com/in/" target="_blank" class="btn btn-outline" style="border-color: var(--border); color: var(--accent);">Follow on LinkedIn</a>
+</main>
+
+<!-- CONNECT / FOOTER -->
+<footer class="site" id="connect">
+  <div class="wrap connect">
+    <h2 class="reveal">Let's talk strategy, innovation, or <a href="https://YOURNAME.substack.com">the newsletter</a>.</h2>
+    <div class="social reveal" data-d="1">
+      <a href="https://YOURNAME.substack.com">Substack</a>
+      <a href="https://www.linkedin.com/in/YOURPROFILE">LinkedIn</a>
+      <a href="mailto:you@example.com">Email</a>
     </div>
-  </div>
-</section>
-
-<!-- RESEARCH -->
-<section id="research">
-  <div class="section-inner">
-    <p class="section-label">Research</p>
-    <h2>Academic work</h2>
-    <p class="section-intro">My PhD research examines innovation management with a focus on dynamic capabilities and business model transformation.</p>
-
-    <div class="pub-list">
-      <div class="pub-card">
-        <p class="pub-type">PhD Thesis · In progress</p>
-        <h3>Title to be confirmed</h3>
-        <p class="pub-meta">Doctoral research in Innovation Management · <em>Update with your institution and supervisors</em></p>
-      </div>
-
-      <div class="pub-card">
-        <p class="pub-type">Working paper</p>
-        <h3>Add your papers and working papers here</h3>
-        <p class="pub-meta"><em>Authors · Venue · Year</em></p>
-      </div>
-
-      <div class="pub-card">
-        <p class="pub-type">Conference</p>
-        <h3>Add conference presentations and proceedings here</h3>
-        <p class="pub-meta"><em>Conference name · Location · Year</em></p>
-      </div>
-    </div>
-
-    <p style="margin-top: 2rem; font-family: system-ui, sans-serif; font-size: 0.85rem; color: var(--muted);">
-      For a full list of publications, see my
-      <a href="https://scholar.google.com" target="_blank" style="color: var(--accent);">Google Scholar profile</a>
-      or <a href="https://orcid.org" target="_blank" style="color: var(--accent);">ORCID</a>.
-    </p>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-inner">
-    <div class="contact-box">
-      <h2>Let's connect</h2>
-      <p>Whether you're a researcher, practitioner, or just curious — I'd love to hear from you. I'm especially interested in conversations about innovation, strategy, and leadership.</p>
-      <div class="contact-links">
-        <a href="mailto:fil.martins.gomes@gmail.com" class="btn btn-primary">
-          ✉️ Email me
-        </a>
-        <a href="https://linkedin.com/in/" target="_blank" class="btn btn-outline">
-          LinkedIn
-        </a>
-        <a href="https://substack.com" target="_blank" class="btn btn-outline">
-          Substack
-        </a>
-      </div>
+    <div class="foot-base">
+      <span>© <span id="year"></span> Filipe</span>
+      <span>Built to be edited</span>
     </div>
   </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 Filipe Martins Gomes · Built with care ·
-    <a href="mailto:fil.martins.gomes@gmail.com" style="color: var(--accent); text-decoration: none;">fil.martins.gomes@gmail.com</a>
-  </p>
 </footer>
 
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const toggle = document.getElementById('toggle');
+  const menu = document.getElementById('menu');
+  toggle.addEventListener('click', () => menu.classList.toggle('open'));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+<script>
+(function(){
+  const canvas=document.getElementById('hero-net'); if(!canvas) return;
+  const ctx=canvas.getContext('2d');
+  const PETROL='30,91,94', CLAY='201,98,47';
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let w,h,dpr,nodes,pulses,raf; const MAXD=150;
+  function size(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    w=canvas.clientWidth; h=canvas.clientHeight; if(!w||!h) return;
+    canvas.width=w*dpr; canvas.height=h*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); build();
+  }
+  function build(){
+    const density=Math.max(34,Math.min(100,Math.round(w*h/13000)));
+    nodes=[];
+    for(let i=0;i<density;i++){
+      const hub=Math.random()<0.12;
+      nodes.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*0.2,vy:(Math.random()-.5)*0.2,r:hub?4.6:2.1,hub});
+    }
+    pulses=[];
+  }
+  function step(){
+    if(!nodes){raf=requestAnimationFrame(step);return;}
+    ctx.clearRect(0,0,w,h);
+    for(let i=0;i<nodes.length;i++){const a=nodes[i];
+      for(let j=i+1;j<nodes.length;j++){const b=nodes[j];
+        const dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);
+        if(d<MAXD){const op=1-d/MAXD;const via=a.hub||b.hub;
+          ctx.strokeStyle='rgba('+(via?CLAY:PETROL)+','+(op*(via?0.50:0.32))+')';
+          ctx.lineWidth=via?1.3:0.9;
+          ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+          if(via&&!reduce&&Math.random()<0.0015){pulses.push({ax:a.x,ay:a.y,bx:b.x,by:b.y,t:0});}
+        }
+      }
+    }
+    for(let k=pulses.length-1;k>=0;k--){const p=pulses[k];p.t+=0.025;
+      if(p.t>=1){pulses.splice(k,1);continue;}
+      const x=p.ax+(p.bx-p.ax)*p.t,y=p.ay+(p.by-p.ay)*p.t;
+      ctx.beginPath();ctx.arc(x,y,2.2,0,6.2832);
+      ctx.fillStyle='rgba('+CLAY+','+(0.9*(1-Math.abs(p.t-0.5)*2))+')';ctx.fill();
+    }
+    for(const n of nodes){
+      ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,6.2832);
+      ctx.fillStyle=n.hub?'rgba('+CLAY+',1)':'rgba('+PETROL+',0.9)';ctx.fill();
+      if(n.hub){ctx.beginPath();ctx.arc(n.x,n.y,n.r+3,0,6.2832);ctx.strokeStyle='rgba('+CLAY+',0.4)';ctx.lineWidth=1;ctx.stroke();}
+      if(!reduce){n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>w)n.vx*=-1;if(n.y<0||n.y>h)n.vy*=-1;}
+    }
+    raf=requestAnimationFrame(step);
+  }
+  let rt;
+  window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{cancelAnimationFrame(raf);size();step();},200);});
+  window.addEventListener('load',size);
+  size(); step();
+})();
+</script>
 </body>
 </html>
