@@ -7,7 +7,7 @@
 <meta name="description" content="Writing and practice at the intersection of strategy, technology, innovation, and organisational learning.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..450&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 <style>
   :root{
     /* Considered Warmth — brand tokens */
@@ -23,9 +23,9 @@
     --clay-deep:#A0451E;
     --rule:#D9D2C4;
     --max:1180px;
-    --display:"Fraunces", Georgia, serif;
-    --read:"Newsreader", Georgia, serif;
-    --label:"Archivo", system-ui, sans-serif;
+    --display:"Roboto", system-ui, sans-serif;
+    --read:"Lora", Georgia, serif;
+    --label:"Roboto", system-ui, sans-serif;
   }
 
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -35,7 +35,7 @@
     background:var(--paper);
     color:var(--ink);
     font-family:var(--read);
-    font-size:clamp(17px,1.05vw + 13px,20px);
+    font-size:clamp(16px,1vw + 12px,18px);
     line-height:1.62;
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
@@ -69,8 +69,9 @@
   .nav-links a{font-family:var(--label);text-transform:uppercase;letter-spacing:.14em;font-size:.74rem;font-weight:500;text-decoration:none;color:var(--ink-soft);position:relative;}
   .nav-links a:not(.btn)::after{content:""; position:absolute; left:0; bottom:-5px; width:100%; height:1.5px; background:var(--petrol); transform:scaleX(0); transform-origin:left; transition:transform .35s cubic-bezier(.2,.7,.3,1);}
   .nav-links a:not(.btn):hover::after{transform:scaleX(1);}
-  .btn{display:inline-block; background:var(--petrol); color:var(--paper); padding:9px 18px; border-radius:2px; text-decoration:none; font-family:var(--label); text-transform:uppercase; letter-spacing:.12em; font-size:.72rem; font-weight:600; transition:background .3s ease, transform .3s ease;}
+  .btn{display:inline-block; background:var(--petrol); color:#fff; padding:9px 18px; border-radius:2px; text-decoration:none; font-family:var(--label); text-transform:uppercase; letter-spacing:.12em; font-size:.72rem; font-weight:600; transition:background .3s ease, transform .3s ease;}
   .btn:hover{background:var(--petrol-deep); transform:translateY(-1px);}
+  .nav-links .btn{color:#fff;}
   .nav-toggle{display:none;background:none;border:0;cursor:pointer;font-family:var(--label);text-transform:uppercase;letter-spacing:.14em;font-size:.74rem;color:var(--ink);}
 
   /* ---------- hero ---------- */
@@ -79,7 +80,7 @@
   .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(135% 120% at 16% 45%, rgba(245,241,232,.90) 0%, rgba(245,241,232,.50) 40%, rgba(245,241,232,.12) 100%);}
   .hero .kicker{margin-bottom:26px;display:flex;align-items:center;gap:14px;}
   .hero .kicker::before{content:"";width:34px;height:1.5px;background:var(--clay);display:inline-block;}
-  .hero h1{font-family:var(--display);font-weight:340;font-size:clamp(2.6rem,6.2vw,5.4rem);line-height:1.02;letter-spacing:-.025em;margin-bottom:30px;max-width:15ch;}
+  .hero h1{font-family:var(--display);font-weight:100;font-size:clamp(2.6rem,6.2vw,5.4rem);line-height:1.08;letter-spacing:.04em;margin-bottom:30px;max-width:15ch;}
   .hero h1 em{font-style:italic;color:var(--clay);font-weight:420;}
   .hero .lede{font-size:clamp(1.15rem,1.6vw,1.5rem);line-height:1.5;color:var(--ink-soft);max-width:42ch;margin-bottom:38px;}
   .hero-cta{display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
@@ -90,13 +91,13 @@
   section{padding:clamp(56px,9vh,108px) 0;}
   .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:46px;border-top:1px solid var(--rule);padding-top:22px;}
   .sec-no{font-family:var(--display);font-style:italic;color:var(--petrol);font-size:1.05rem;}
-  .sec-head h2{font-family:var(--display);font-weight:380;font-size:clamp(1.8rem,3.2vw,2.7rem);letter-spacing:-.02em;line-height:1.05;}
+  .sec-head h2{font-family:var(--display);font-weight:300;font-size:clamp(1.8rem,3.2vw,2.7rem);letter-spacing:.05em;line-height:1.1;}
 
   /* ---------- about ---------- */
   .about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(40px,6vw,90px);align-items:start;}
-  .about-body p{margin-bottom:1.1em;font-size:clamp(1.1rem,1.3vw,1.32rem);color:#2b291f;}
+  .about-body p{margin-bottom:1.1em;font-size:clamp(1rem,1.15vw,1.15rem);color:#2b291f;}
   .about-body p:last-child{margin-bottom:0;}
-  .about-body .drop::first-letter{font-family:var(--display);font-size:3.6em;line-height:.78;float:left;padding:.06em .12em 0 0;color:var(--petrol);font-weight:380;}
+  .about-body .drop::first-letter{font-family:var(--display);font-size:3.6em;line-height:.78;float:left;padding:.06em .12em 0 0;color:var(--petrol);font-weight:100;}
   .facts{font-family:var(--label);}
   .facts dl{display:grid;gap:0;}
   .facts .row{padding:16px 0;border-top:1px solid var(--rule);}
@@ -112,7 +113,7 @@
   .theme{background:var(--paper);padding:34px 30px 38px;transition:background .4s ease;position:relative;}
   .theme:hover{background:var(--sand);}
   .theme .t-no{font-family:var(--display);font-style:italic;font-size:1.1rem;color:var(--petrol);margin-bottom:20px;}
-  .theme h3{font-family:var(--display);font-weight:400;font-size:1.5rem;line-height:1.1;letter-spacing:-.01em;margin-bottom:14px;}
+  .theme h3{font-family:var(--display);font-weight:400;font-size:1.45rem;line-height:1.15;letter-spacing:.04em;margin-bottom:14px;}
   .theme p{font-size:1.02rem;color:var(--ink-soft);line-height:1.5;}
   .theme .names{margin-top:18px;font-family:var(--label);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);}
 
@@ -123,18 +124,18 @@
   .posts .post:last-child{border-bottom:1px solid var(--rule);}
   .post:hover{padding-left:14px;}
   .post .meta{font-family:var(--label);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--stone);margin-bottom:9px;}
-  .post h3{font-family:var(--display);font-weight:400;font-size:1.42rem;line-height:1.12;letter-spacing:-.01em;transition:color .3s;}
+  .post h3{font-family:var(--display);font-weight:400;font-size:1.35rem;line-height:1.2;letter-spacing:.03em;transition:color .3s;}
   .post:hover h3{color:var(--petrol);}
   .subscribe{background:var(--petrol);color:var(--paper);padding:42px 38px;border-radius:3px;position:sticky;top:90px;}
   .subscribe .label{color:#9fc2bf;}
-  .subscribe h3{font-family:var(--display);font-weight:360;font-size:1.9rem;line-height:1.1;margin:16px 0 14px;letter-spacing:-.01em;}
+  .subscribe h3{font-family:var(--display);font-weight:300;font-size:1.85rem;line-height:1.15;margin:16px 0 14px;letter-spacing:.04em;}
   .subscribe p{color:#cfe0de;font-size:1.02rem;line-height:1.5;margin-bottom:26px;}
   .subscribe .btn{background:var(--clay);color:#fff;width:100%;text-align:center;padding:13px;}
   .subscribe .btn:hover{background:var(--paper);color:var(--petrol);}
 
   /* ---------- connect / footer ---------- */
   footer.site{padding:clamp(60px,9vh,110px) 0 50px;border-top:1px solid var(--rule);}
-  .connect h2{font-family:var(--display);font-weight:340;font-size:clamp(2rem,4.5vw,3.4rem);letter-spacing:-.02em;line-height:1.05;max-width:16ch;margin-bottom:36px;}
+  .connect h2{font-family:var(--display);font-weight:100;font-size:clamp(2rem,4.5vw,3.4rem);letter-spacing:.04em;line-height:1.1;max-width:16ch;margin-bottom:36px;}
   .connect h2 a{color:var(--clay-deep);text-decoration:none;border-bottom:2px solid transparent;transition:border-color .3s;}
   .connect h2 a:hover{border-color:var(--clay);}
   .social{display:flex;gap:28px;flex-wrap:wrap;margin-bottom:60px;}
@@ -189,7 +190,7 @@
     <canvas class="hero-canvas" id="hero-net" aria-hidden="true"></canvas>
     <div class="hero-veil" aria-hidden="true"></div>
     <div class="wrap">
-      <div class="kicker reveal"><span class="label">Network Weaving · Innovation · People</span></div>
+      <div class="kicker reveal"><span class="label">Network Weaving · Innovation · People · Venture-supporting</span></div>
       <h1 class="reveal" data-d="1">The interesting work happens <em>between</em> things.</h1>
       <p class="lede reveal" data-d="2">Between disciplines, sectors, and people who don't yet know they need each other. I'm a network weaver — connecting ideas, organisations, and people across the boundaries where value actually gets created.</p>
       <div class="hero-cta reveal" data-d="3">
@@ -213,9 +214,9 @@
         <div class="facts reveal" data-d="2">
           <figure class="portrait"><img src="portrait.jpg" alt="Portrait of Filipe"></figure>
           <dl>
-            <div class="row"><dt>Role</dt><dd>Principal Innovation Solutions Consultant, Digital Catapult</dd></div>
-            <div class="row"><dt>Focus</dt><dd>Network Weaving · Innovation · People</dd></div>
-            <div class="row"><dt>Education</dt><dd>PhD (in progress), Innovation Intermediaries · MSc, Production Engineering</dd></div>
+            <div class="row"><dt>Actual Role</dt><dd>Principal Innovation Solutions Consultant, Digital Catapult</dd></div>
+            <div class="row"><dt>Focus</dt><dd>Network Weaving · Innovation · People · Venture-supporting</dd></div>
+            <div class="row"><dt>Education</dt><dd>PhD in Management (in progress) · MSc, Production Engineering – Innovation Management · MBA in Marketing · BA in Communications</dd></div>
             <div class="row"><dt>Based</dt><dd>United Kingdom</dd></div>
           </dl>
         </div>
